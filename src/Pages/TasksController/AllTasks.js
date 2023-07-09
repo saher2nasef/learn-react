@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import React, { useContext, useEffect, useState } from "react";
 import { AppDataContext } from "../../AppData/App.Data";
 import "./All-Tasks-style.css";
@@ -7,7 +8,7 @@ import { toast } from "react-toastify";
 import { Delete } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
 const AllTasks = () => {
-  let { Data } = useContext(AppDataContext);
+  let { Data, ChangeData } = useContext(AppDataContext);
   let [AllTasks, setTasks] = useState([]);
   useEffect(() => {
     setTasks(Data.Tasks);
@@ -18,12 +19,12 @@ const AllTasks = () => {
     navigate(`/Task/${TaskId}`);
   };
   let DeleteTask = (task) => {
+    // eslint-disable-next-line array-callback-return
     AllTasks.filter((Task, index) => {
       if (Task.TaskId == task.TaskId) {
         AllTasks.splice(index, 1);
       }
     });
-    console.log(Data);
     SaveData({
       SaveAs: Data["KeyData"],
       Data: AllTasks,
@@ -33,6 +34,19 @@ const AllTasks = () => {
     });
     navigate("/All-Tasks");
   };
+  const DeleteAllTasks = () => {
+    Data.Tasks = [];
+    ChangeData(Data);
+    setTasks(
+      AllTasks.map((TaskItem) => {
+        return TaskItem;
+      })
+    );
+    SaveData({
+      SaveAs: Data["KeyData"],
+      Data: [],
+    });
+  };
   return (
     <section id="AllTasks" className="pb-5">
       <div className="container">
@@ -40,6 +54,22 @@ const AllTasks = () => {
           <div className="col-12 text-center pt-3">
             <h2>All Task</h2>
           </div>
+          {AllTasks.length > 1 ? (
+            <div className="col-12">
+              <div className="w-100 text-center my-3  d-flex align-items-center justify-content-center">
+                <button
+                  className="btn btn-danger d-flex align-items-center"
+                  onClick={DeleteAllTasks}
+                >
+                  <span className="me-2">Delete All Tasks</span>
+                  <Delete></Delete>
+                </button>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
+
           <div className="col-xl-5 col-lg-6 col-md-8 col-sm-12">
             <hr />
             {AllTasks.length !== 0 ? (
