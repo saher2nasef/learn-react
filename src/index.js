@@ -1,0 +1,31 @@
+// Imports For React
+import React from "react";
+import ReactDOM from "react-dom/client";
+import reportWebVitals from "./reportWebVitals";
+// Imports For React
+// Imports For Style
+import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap";
+import "react-toastify/dist/ReactToastify.css";
+// Imports For Style
+// Imports For Structure
+import RouterController from "./RouterController/RouterController";
+import { AppDataContextProvider } from "./AppData/App.Data";
+import { ToastContainer } from "react-toastify";
+// Imports For Structure
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <AppDataContextProvider>
+    <React.StrictMode>
+      <RouterController />
+      <ToastContainer autoClose={4000} />
+    </React.StrictMode>
+  </AppDataContextProvider>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();

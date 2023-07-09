@@ -1,0 +1,13 @@
+#HomePage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 57px);
+  color: #fff;
+  background-color: #25292dfc;
+}
+#HomePage h2 {
+  font-weight: 900;
+  font-size: 50px;
+  text-align: center;
+}

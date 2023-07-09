@@ -1,0 +1,13 @@
+.AllTasksShow .Task {
+  border-radius: 8px;
+  padding: 14px;
+  border: 2px solid #eee;
+}
+@media (max-width: 440px) {
+  .Task .header {
+    flex-direction: column;
+  }
+  .Task .header div:last-child {
+    margin-top: 10px;
+  }
+}

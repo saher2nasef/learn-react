@@ -1,0 +1,40 @@
+.Porjects {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.Porject {
+  width: 300px;
+  background-color: #eee;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  text-align: center;
+  border-radius: 5px;
+}
+.controllerBar {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.controllerBar ul {
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.controllerBar ul li {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
