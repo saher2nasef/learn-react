@@ -1,7 +1,12 @@
-.AllTasksShow .Task {
+.Light .AllTasksShow .Task {
   border-radius: 8px;
   padding: 14px;
   border: 2px solid #eee;
+}
+.Dark .AllTasksShow .Task {
+  border-radius: 8px;
+  padding: 14px;
+  border: 2px solid #424141;
 }
 @media (max-width: 440px) {
   .Task .header {
@@ -10,4 +15,13 @@
   .Task .header div:last-child {
     margin-top: 10px;
   }
+}
+.Theme li {
+  color: var(--Color);
+  background-color: var(--BG);
+}
+#EditTask input,
+#EditTask input::placeholder {
+  color: var(--Color);
+  background-color: var(--BG);
 }

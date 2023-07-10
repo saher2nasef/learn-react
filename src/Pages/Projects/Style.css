@@ -8,7 +8,8 @@
 
 .Porject {
   width: 300px;
-  background-color: #eee;
+  color: var(--Color);
+  background-color: var(--BG);
   height: 200px;
   display: flex;
   align-items: center;
@@ -16,6 +17,12 @@
   margin: 10px;
   text-align: center;
   border-radius: 5px;
+}
+.Light .Porject {
+  border: 2px solid #000;
+}
+.Dark .Porject {
+  border: 2px solid #eee;
 }
 .controllerBar {
   width: 100%;

@@ -1,5 +1,6 @@
 /* eslint-disable eqeqeq */
 import React, { useContext, useEffect, useState } from "react";
+import AOS from "aos";
 import { AppDataContext } from "../../AppData/App.Data";
 import "./All-Tasks-style.css";
 import { useNavigate } from "react-router-dom";
@@ -8,12 +9,8 @@ import { toast } from "react-toastify";
 import { Delete } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
 const AllTasks = () => {
-  let { Data, ChangeData } = useContext(AppDataContext);
-  let [AllTasks, setTasks] = useState([]);
-  useEffect(() => {
-    setTasks(Data.Tasks);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [AllTasks]);
+  let { Data, SetTasks } = useContext(AppDataContext);
+  let [AllTasks, setallTasks] = useState([]);
   let navigate = useNavigate();
   const GoToDetailsTask = (TaskId) => {
     navigate(`/Task/${TaskId}`);
@@ -36,8 +33,8 @@ const AllTasks = () => {
   };
   const DeleteAllTasks = () => {
     Data.Tasks = [];
-    ChangeData(Data);
-    setTasks(
+    SetTasks([]);
+    setallTasks(
       AllTasks.map((TaskItem) => {
         return TaskItem;
       })
@@ -47,6 +44,11 @@ const AllTasks = () => {
       Data: [],
     });
   };
+  useEffect(() => {
+    setallTasks(Data.Tasks);
+    AOS.init();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [AllTasks]);
   return (
     <section id="AllTasks" className="pb-5">
       <div className="container">
@@ -56,7 +58,11 @@ const AllTasks = () => {
           </div>
           {AllTasks.length > 1 ? (
             <div className="col-12">
-              <div className="w-100 text-center my-3  d-flex align-items-center justify-content-center">
+              <div
+                className="w-100 text-center my-3  d-flex align-items-center justify-content-center"
+                data-aos="zoom-out"
+                data-aos-delay="100"
+              >
                 <button
                   className="btn btn-danger d-flex align-items-center"
                   onClick={DeleteAllTasks}
@@ -74,9 +80,14 @@ const AllTasks = () => {
             <hr />
             {AllTasks.length !== 0 ? (
               <div className="AllTasksShow">
-                {AllTasks.map((Task) => {
+                {AllTasks.map((Task, index) => {
                   return (
-                    <div className="Task mb-2" key={Task.TaskId}>
+                    <div
+                      className="Task mb-2"
+                      key={Task.TaskId}
+                      data-aos-delay={(index + 1) * 100}
+                      data-aos="fade-left"
+                    >
                       <div className="header d-flex w-100 align-items-center justify-content-between">
                         <h3 className="Title">{Task.TaskTitle}</h3>
                         <div className="buttons-controllers">
@@ -94,10 +105,9 @@ const AllTasks = () => {
                           </Tooltip>
                         </div>
                       </div>
-                      {/* <h3 className="Title">{Task.TaskTitle}</h3> */}
                       <div className="TaskItems mt-3 mb-3">
                         <label className="form-label mb-1">Task Items</label>
-                        <ol className="list-group">
+                        <ol className="list-group Theme">
                           {Task.TaskItems.length < 3
                             ? Task.TaskItems.map((TaskItem) => {
                                 return (

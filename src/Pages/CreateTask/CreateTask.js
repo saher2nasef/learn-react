@@ -4,15 +4,16 @@ import { Link } from "react-router-dom";
 import { AppDataContext } from "../../AppData/App.Data";
 import { SaveData } from "../../ServicesApp/DataController";
 import { toast } from "react-toastify";
-
+import AOS from "aos";
+import "./CreateTask.style.css";
 const CreateTask = () => {
   let TitleValueInput = useRef();
   let ItemValueInput = useRef();
   let [TaskItems, setTaskItems] = useState([]);
   let [Task, setTask] = useState({});
-  let { Data, ChangeData } = useContext(AppDataContext);
+  let { Data, SetTasks } = useContext(AppDataContext);
   let [ShowSectionsToAddTask, setShowSectionsToAddTask] = useState(true);
-  useEffect(() => {}, []);
+
   const CreateTask = () => {
     let TaskTitle = TitleValueInput["current"].value;
     if (TaskTitle.replaceAll(" ", "").length !== 0 && TaskItems.length !== 0) {
@@ -33,7 +34,7 @@ const CreateTask = () => {
       };
       setTask(TaskData);
       Data.Tasks.push(TaskData);
-      ChangeData(Data);
+      SetTasks(Data.Tasks);
       SaveData({
         Data: Data.Tasks,
         SaveAs: Data.KeyData,
@@ -68,17 +69,28 @@ const CreateTask = () => {
     });
     setTaskItems(AllTaskItems);
   };
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <section id="CreateTask" className="pb-5">
       <div className="container">
         <div className="row align-items-center justify-content-center">
-          <div className="col-12 text-center pt-3">
+          <div
+            className="col-12 text-center pt-3"
+            data-aos-delay="100"
+            data-aos="fade-left"
+          >
             <h2>Create Task</h2>
           </div>
           <div className="col-xl-5 col-lg-5 col-md-5 col-sm-12">
             {ShowSectionsToAddTask ? (
               <div className="Task pt-3">
-                <div className="Input-Box">
+                <div
+                  data-aos-delay="200"
+                  data-aos="fade-left"
+                  className="Input-Box"
+                >
                   <label htmlFor="TaskTitle" className="form-label">
                     Enter Your Task Title
                   </label>
@@ -91,7 +103,11 @@ const CreateTask = () => {
                     placeholder="Task Title"
                   />
                 </div>
-                <div className="AddTaskItems mt-3 mb-3">
+                <div
+                  data-aos-delay="300"
+                  data-aos="fade-left"
+                  className="AddTaskItems mt-3 mb-3"
+                >
                   <label htmlFor="AddTaskItems" className="form-label mb-1">
                     Add Task Items
                   </label>
@@ -112,9 +128,13 @@ const CreateTask = () => {
                     </button>
                   </div>
                 </div>
-                <div className="TaskItems mt-3 mb-3">
+                <div
+                  data-aos-delay="400"
+                  data-aos="fade-left"
+                  className="TaskItems mt-3 mb-3"
+                >
                   <label className="form-label mb-1">Task Items</label>
-                  <ol className="list-group">
+                  <ol className="list-group Theme">
                     {TaskItems.map((TaskItem, index) => {
                       return (
                         <li
@@ -136,7 +156,11 @@ const CreateTask = () => {
                     })}
                   </ol>
                 </div>
-                <div className="Button-Box w-100">
+                <div
+                  data-aos-delay="500"
+                  data-aos="fade-left"
+                  className="Button-Box w-100"
+                >
                   <button
                     className="btn btn-primary w-100"
                     onClick={CreateTask}
@@ -149,18 +173,28 @@ const CreateTask = () => {
               <div className="p-2">
                 <div className="alert alert-info">Your Task Is Created</div>
                 <div className="Task">
-                  <h3 className="TaskTitle">
+                  <h3
+                    className="TaskTitle"
+                    data-aos-delay="100"
+                    data-aos="fade-left"
+                  >
                     Task Title is : <strong>{Task.TaskTitle}</strong>
                   </h3>
                   <hr />
                   <div>
-                    <label className="form-label mb-1">
+                    <label
+                      className="form-label mb-1"
+                      data-aos-delay="200"
+                      data-aos="fade-left"
+                    >
                       <h4>Task Items</h4>
                     </label>
-                    <ol className="list-group">
+                    <ol className="list-group Theme">
                       {Task.TaskItems.map((TaskItem, index) => {
                         return (
                           <li
+                            data-aos-delay={(index + 1) * 100}
+                            data-aos="fade-left"
                             key={index}
                             className="list-group-item d-flex justify-content-between align-items-center list-group-item-action "
                             style={{ cursor: "pointer" }}

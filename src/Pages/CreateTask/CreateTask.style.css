@@ -1,0 +1,9 @@
+.Theme li {
+  color: var(--Color);
+  background-color: var(--BG);
+}
+#CreateTask input,
+#CreateTask input::placeholder {
+  color: var(--Color);
+  background-color: var(--BG);
+}

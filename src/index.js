@@ -8,19 +8,23 @@ import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap";
 import "react-toastify/dist/ReactToastify.css";
+import "aos/dist/aos.css";
 // Imports For Style
 // Imports For Structure
 import RouterController from "./RouterController/RouterController";
 import { AppDataContextProvider } from "./AppData/App.Data";
 import { ToastContainer } from "react-toastify";
+import AppChildren from "./AppChildren";
 // Imports For Structure
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AppDataContextProvider>
     <React.StrictMode>
-      <RouterController />
-      <ToastContainer autoClose={4000} />
+      <AppChildren>
+        <RouterController />
+        <ToastContainer autoClose={4000} />
+      </AppChildren>
     </React.StrictMode>
   </AppDataContextProvider>
 );

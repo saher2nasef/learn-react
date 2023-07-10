@@ -4,13 +4,13 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { AppDataContext } from "../../AppData/App.Data";
 import { SaveData } from "../../ServicesApp/DataController";
 import { toast } from "react-toastify";
-import { to } from "react-bootstrap";
+import "./All-Tasks-style.css";
 const EditTask = () => {
   let Params = useParams();
   let TitleValueInput = useRef();
   let ItemValueInput = useRef();
   let [TaskItems, setTaskItems] = useState([]);
-  let { Data, ChangeData } = useContext(AppDataContext);
+  let { Data, SetTasks } = useContext(AppDataContext);
   let TaskData = Data["Tasks"].filter((Task) => {
     if (Task.TaskId == Params["TaskId"]) {
       return Task;
@@ -30,7 +30,7 @@ const EditTask = () => {
       TaskData.TaskTitle = TaskTitle;
       TaskData.TaskItems = TaskItems;
       setTask(TaskData);
-      ChangeData(Data);
+      SetTasks(Data.Tasks);
       SaveData({
         Data: Data.Tasks,
         SaveAs: Data.KeyData,
@@ -111,7 +111,7 @@ const EditTask = () => {
               </div>
               <div className="TaskItems mt-3 mb-3">
                 <label className="form-label mb-1">Task Items</label>
-                <ol className="list-group">
+                <ol className="list-group Theme">
                   {TaskItems.map((TaskItem, index) => {
                     return (
                       <li

@@ -3,8 +3,8 @@
   align-items: center;
   justify-content: center;
   height: calc(100vh - 57px);
-  color: #fff;
-  background-color: #25292dfc;
+  color: var(--Color);
+  background-color: var(--BG);
 }
 #HomePage h2 {
   font-weight: 900;

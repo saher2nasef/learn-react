@@ -8,6 +8,7 @@ import { Tooltip } from "@mui/material";
 import { SaveData } from "../../ServicesApp/DataController";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import "./All-Tasks-style.css";
 const TaskPage = () => {
   let Params = useParams();
   let navigate = useNavigate();
@@ -73,7 +74,7 @@ const TaskPage = () => {
               </div>
               <div className="TaskItems mt-3 mb-3">
                 <label className="form-label mb-1">Task Items</label>
-                <ol className="list-group">
+                <ol className="list-group Theme">
                   {TaskData.TaskItems.map((TaskItem) => {
                     return (
                       <li

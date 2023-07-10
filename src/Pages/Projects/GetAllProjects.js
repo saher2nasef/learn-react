@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Style.css";
-const Portfolio = () => {
+import AOS from "aos";
+const GetAllProjects = () => {
   let Projects = [
     {
       type: "Front-End",
@@ -54,19 +55,26 @@ const Portfolio = () => {
         Types.push(Project.type);
       }
     });
+    AOS.init();
     setTypes(Types);
   }, []);
   const FilterBy = (FilterByType) => {
-    setData(
-      Projects.filter((Project) => {
-        if (Project.type == FilterByType) {
-          return Project;
-        }
-      })
-    );
+    setData([]);
+    setTimeout(() => {
+      setData(
+        Projects.filter((Project) => {
+          if (Project.type == FilterByType) {
+            return Project;
+          }
+        })
+      );
+    }, 50);
   };
   const All = () => {
-    setData(Projects);
+    setData([]);
+    setTimeout(() => {
+      setData(Projects);
+    }, 50);
   };
   return (
     <section id="Portfolio">
@@ -100,7 +108,12 @@ const Portfolio = () => {
           <div className="Porjects">
             {Data.map((Project, index) => {
               return (
-                <div className="Porject" key={index}>
+                <div
+                  className="Porject"
+                  key={index}
+                  data-aos-delay="100"
+                  data-aos="zoom-in"
+                >
                   <div>
                     <h4>{Project.type}</h4>
                     <p>{Project.Data["ProjectName"]}</p>
@@ -115,4 +128,4 @@ const Portfolio = () => {
   );
 };
 
-export default Portfolio;
+export default GetAllProjects;

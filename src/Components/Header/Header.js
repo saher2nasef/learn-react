@@ -7,16 +7,20 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
 const Header = () => {
   let Links = [
     { Path: "/", LinkName: "Home" },
     { Path: "/All-Tasks", LinkName: "Tasks" },
     { Path: "/Create-Task", LinkName: "Create Task" },
+    { Path: "/Projects", LinkName: "Projects" },
   ];
   const [show, setShow] = useState(false);
-  let Data = useContext(AppDataContext);
-  let AppName = Data.Data.AppName;
+  let { Data, SetMode } = useContext(AppDataContext);
+  let AppName = Data["AppName"];
   let expand = "lg";
+  let [Theme, SetTheme] = useState(Data["Theme"]);
   const location = useLocation();
   useEffect(() => {
     if (show) {
@@ -25,9 +29,20 @@ const Header = () => {
   }, [location.pathname]);
   useEffect(() => {
     setShow(false);
+    SetTheme(Data["Theme"]);
   }, []);
   const ChangeShow = () => {
     setShow(!show);
+  };
+
+  const ChangeMode = () => {
+    if (Theme === "Light") {
+      SetTheme("Dark");
+      SetMode("Dark");
+    } else if (Theme === "Dark") {
+      SetTheme("Light");
+      SetMode("Light");
+    }
   };
   return (
     <>
@@ -76,6 +91,15 @@ const Header = () => {
                     </li>
                   );
                 })}
+                <li className="nav-item">
+                  <button className="btn" onClick={ChangeMode}>
+                    {Theme === "Dark" ? (
+                      <LightModeIcon></LightModeIcon>
+                    ) : (
+                      <DarkModeIcon></DarkModeIcon>
+                    )}
+                  </button>
+                </li>
               </Nav>
               <Form className="d-flex">
                 <Form.Control
